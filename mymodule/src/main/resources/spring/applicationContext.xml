@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
     <!--1 引入属性文件，在配置中占位使用 -->
-    <context:property-placeholder location="classpath*:db1.properties" />
+    <context:property-placeholder location="classpath*:db.properties" />
 
     <!--2 配置C3P0数据源 -->
     <bean id="dataSourceHikari" class="com.zaxxer.hikari.HikariDataSource" >
