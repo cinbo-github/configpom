@@ -22,7 +22,7 @@ public class myservlet extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-            resp.getOutputStream().write(((String)myWebProcess.process("insert")).getBytes());
+            resp.getOutputStream().write(((String)myWebProcess.process("insert1")).getBytes());
 
     }
 

@@ -2,6 +2,7 @@ package com.cinbo.iface;
 
 import com.cinbo.dto.UsersDTO;
 import com.cinbo.mapper.MyTestDBDao;
+import com.cinbo.testbean.myclass2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,10 +24,15 @@ public class MyWebProcess implements WebProcess {
     @Autowired
     IMyDBOperator myDBOperator;
 
+    @Autowired
+    MyClassInterface  class2;
+
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED,rollbackFor = Throwable.class,readOnly = false)
     public Object process(String data) {
+
+        class2.aopfuc("OK");
 
 
         if(data.equalsIgnoreCase("insert")){
@@ -39,7 +45,7 @@ public class MyWebProcess implements WebProcess {
             throw new RuntimeException("测试异常");
             //return "insert ok";
         }else {
-            Integer id = Integer.parseInt(data);
+            //Integer id = Integer.parseInt(data);
 
             UsersDTO usersDTO = myTestDBDao.selectById(81);
 

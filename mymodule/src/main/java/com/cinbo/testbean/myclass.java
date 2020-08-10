@@ -26,4 +26,6 @@ public class myclass {
         String my=null;
         System.out.println("test string"+my+" is test.");
     }
+
+
 }
