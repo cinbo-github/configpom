@@ -22,7 +22,16 @@ public class myservlet extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-            resp.getOutputStream().write(((String)myWebProcess.process("insert1")).getBytes());
+        String url = req.getRequestURI();
+        String outStr="";
+        if(url.contains("/insert")) {
+            //插入一条记录
+            outStr = (String) myWebProcess.process("insert");
+        }else{
+            //检查id为81的user信息
+            outStr = (String) myWebProcess.process("81");
+        }
+        resp.getOutputStream().write(outStr.getBytes());
 
     }
 

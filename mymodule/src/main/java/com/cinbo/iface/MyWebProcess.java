@@ -32,9 +32,11 @@ public class MyWebProcess implements WebProcess {
     @Transactional(propagation= Propagation.REQUIRED,rollbackFor = Throwable.class,readOnly = false)
     public Object process(String data) {
 
+        //方法切面定义，通过注解定义切面。定义类 aopConfig
+        //执行这个方法时，会执行切面前后的方法
         class2.aopfuc("OK");
 
-
+        //根据process传入的参数坐不同的处理
         if(data.equalsIgnoreCase("insert")){
             UsersDTO usersDTO = new UsersDTO();
             usersDTO.setUsername("testname");
@@ -45,9 +47,9 @@ public class MyWebProcess implements WebProcess {
             throw new RuntimeException("测试异常");
             //return "insert ok";
         }else {
-            //Integer id = Integer.parseInt(data);
+            Integer id = Integer.parseInt(data);
 
-            UsersDTO usersDTO = myTestDBDao.selectById(81);
+            UsersDTO usersDTO = myTestDBDao.selectById(id);
 
             return "ok,i am ok!" + usersDTO.toString();
         }
