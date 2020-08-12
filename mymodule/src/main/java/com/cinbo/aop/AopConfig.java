@@ -1,15 +1,16 @@
 package com.cinbo.aop;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("aopconfig")
 @Aspect
 public class AopConfig {
-    private static final Logger log = Logger.getLogger(AopConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(AopConfig.class);
 
     @Pointcut("execution(* com.cinbo.testbean.myclass2.*(..))")
     public void testAop(){}

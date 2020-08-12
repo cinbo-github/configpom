@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn" monitorInterval="1800">
+    <appenders>
+        <!-- 定义控制台输出 -->
+<!--        <Socket name="socket-api" host="192.168.182.145" port="4560" protocol="TCP">-->
+<!--            <JsonLayout compact="true" eventEol="true" />-->
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:mm:ss.SSS} [%} [%t] %-5level %logger{36} - %ex%msg%n"/>-->
+<!--        </Socket>-->
+        <!-- 输出控制台的配置 -->
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss.SSS}] [%t] %-5level %logger{36} - %m%n"/>
+        </console>
+
+    </appenders>
+    <loggers>
+        <!-- 异步发送logstash -->
+<!--        <AsyncLogger name="testoutput" level="DEBUG" includeLocation="false">-->
+<!--            <appender-ref ref="socket-api" />-->
+<!--        </AsyncLogger>-->
+        <!-- dev Root Logger -->
+<!--        <AsynRoot level="DEBUG" includeLocation="true">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref="file-info"/>-->
+<!--            <AppenderRef ref="file-debug"/>-->
+<!--            <AppenderRef ref="file-warn"/>-->
+<!--            <AppenderRef ref="file-error"/>-->
+<!--            <AppenderRef ref="testoutput"/>-->
+<!--        </AsynRoot>-->
+        <root level="debug">
+            <appender-ref ref="Console"/>
+<!--            <appender-ref ref="socket-api"/>-->
+        </root>
+    </loggers>
+</configuration>
