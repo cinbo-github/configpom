@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:P="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -14,12 +14,34 @@
         http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
     <!--1 引入属性文件，在配置中占位使用 -->
-    <context:property-placeholder location="classpath*:db.properties" />
+<!--    <context:property-placeholder location="classpath*:db.properties" />-->
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          P:ignoreUnresolvablePlaceholders="true">
+        <property name="locations">
+            <list>
+                <value>classpath*:application/*.properties</value>
+                <value>classpath*:*.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyPlaceholderConfigurer1"
+          class="com.cinbo.util.LocalPropertiesUtils1"
+          P:ignoreUnresolvablePlaceholders="true">
+        <property name="locations">
+            <list>
+                <value>classpath*:application/*.properties</value>
+                <value>classpath*:*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="myproperties" class="com.cinbo.util.LocalPropertiesUtils1"></bean>
 
     <!--2 配置C3P0数据源 -->
     <bean id="dataSourceHikari" class="com.zaxxer.hikari.HikariDataSource" >
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="jdbcUrl" value="${jdbc.url1}" />
+        <property name="driverClassName" value="${jdbc.driver2}" />
+        <property name="jdbcUrl" value="${jdbc.url2}" />
         <property name="username" value="${jdbc.uid}" />
         <property name="password" value="${jdbc.pwd}" />
         <!-- 连接只读数据库时配置为true， 保证安全 -->
@@ -92,5 +114,25 @@
         <aop:pointcut id="myDBoperatorMethods" expression="execution(* com.cinbo.iface.MyDBOperator.insert(..))"/>
         <aop:advisor advice-ref="myDboperatorAdvice" pointcut-ref="myDBoperatorMethods" order="0"/>
     </aop:config>
+
+
+
+    <bean id="mytestclass" class="com.cinbo.testbean.MyTestClass">
+        <property name="testMap">
+            <map>
+                <entry key="${cim.url.ip1}">
+                    <value>${cim.url.value}</value>
+                </entry>
+                <entry key="${cim.url.ip2}">
+                    <value>${cim.url.value}</value>
+                </entry>
+                <entry key="${cim.url.ip3}">
+                    <value>${cim.url.value}</value>
+                </entry>
+            </map>
+
+
+        </property>
+    </bean>
 
 </beans>

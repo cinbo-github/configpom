@@ -20,7 +20,9 @@ public class LocalPropertiesUtils1 extends PropertyPlaceholderConfigurer {
             ConfigurableListableBeanFactory beanFactoryToProcess,
             Properties props) throws BeansException {
         super.processProperties(beanFactoryToProcess, props);
-        ctxPropertiesMap = new HashMap();
+        if(ctxPropertiesMap == null) {
+            ctxPropertiesMap = new HashMap();
+        }
         for (Object key : props.keySet()) {
             String keyStr = key.toString();
             String value = props.getProperty(keyStr);
