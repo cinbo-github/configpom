@@ -24,6 +24,8 @@ public class MyTestClass {
     public static void main(String[] args) {
         MyTestClass myTestClass = new MyTestClass();
         System.out.println("OK");
+        Integer a = Integer.valueOf("10");
+        System.out.println(a.equals(11));
     }
 
 }

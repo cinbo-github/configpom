@@ -2,7 +2,7 @@ package com.cinbo.testbean;
 
 import org.springframework.stereotype.Component;
 
-@Component("testJniMain")
+//@Component("testJniMain")
 public class TestJniMain {
 
     public native static void HelloWord();

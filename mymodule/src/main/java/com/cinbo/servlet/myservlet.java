@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author chenyinbo
@@ -18,11 +20,16 @@ import java.io.IOException;
 public class myservlet extends HttpServlet {
 
     public WebProcess myWebProcess;
+
+    private ThreadLocal<List<String>> listString;
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         String url = req.getRequestURI();
+        List<String> tmpListString = listString.get();
+        System.out.println(Thread.currentThread().getName()+": list addr:"+tmpListString.size());
+        tmpListString.add("1");
         String outStr="";
         if(url.contains("/insert")) {
             //插入一条记录
@@ -41,7 +48,7 @@ public class myservlet extends HttpServlet {
 //                .getBean("dataSourceHikari", HikariDataSource.class);
         myWebProcess = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext())
                 .getBean("myWebProcess",WebProcess.class);
-
+        listString = ThreadLocal.withInitial(() -> new ArrayList<>(16));
     }
 
 
